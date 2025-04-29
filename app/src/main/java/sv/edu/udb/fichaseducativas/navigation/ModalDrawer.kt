@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
@@ -28,10 +29,13 @@ fun ModalDrawer(
             text = NavigationStrings.NombreApp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(all = 10.dp),
-            fontSize = 20.sp
+            fontSize = 20.sp,
+            color = MaterialTheme.colorScheme.primary
         )
 
-        HorizontalDivider()
+        HorizontalDivider(
+            color = MaterialTheme.colorScheme.primary
+        )
 
         ItemMenu.ItemsMenu.forEach {
             NavigationDrawerItem(
