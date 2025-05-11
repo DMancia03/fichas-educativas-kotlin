@@ -9,6 +9,10 @@ class Tematica {
         Nombre = _nombre
     }
 
+    constructor(_nombre : String){
+        Nombre = _nombre
+    }
+
     companion object{
         val TABLE_NAME = "tematica"
 
