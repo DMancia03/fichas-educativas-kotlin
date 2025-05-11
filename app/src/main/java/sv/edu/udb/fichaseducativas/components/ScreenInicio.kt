@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import sv.edu.udb.fichaseducativas.models.Ficha
+import sv.edu.udb.fichaseducativas.navigation.NavigationStrings
 import sv.edu.udb.fichaseducativas.service.FichaService
 import sv.edu.udb.fichaseducativas.service.TematicaService
 
@@ -117,7 +118,7 @@ fun ScreenInicio(
                                             expanded = false
 
                                             // Acción para agregar ficha->Navegar a la pantalla de agregar ficha
-
+                                            navHostController.navigate("${NavigationStrings.ItemMenuRouteFichasForm}?action=${NavigationStrings.ActionCreate}&idTematica=${tematica.Id}")
 
                                         }
                                     )
@@ -129,6 +130,7 @@ fun ScreenInicio(
 
 
                                             // Acción para administrar tematica->Navegar a la pantalla de fichas
+                                            navHostController.navigate("${NavigationStrings.ItemMenuRouteFichas}?idTematica=${tematica.Id}")
 
                                         }
                                     )
@@ -153,7 +155,7 @@ fun ScreenInicio(
                             onClick = {
 
                                 // Acción del botón "Ver fichas" -> Navegar a la pantalla de fichas
-
+                                navHostController.navigate("${NavigationStrings.ItemMenuRouteFichasRevisar}?idTematica=${tematica.Id}")
                             },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color(0xFF3D6ED9)

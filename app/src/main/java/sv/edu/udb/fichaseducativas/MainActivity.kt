@@ -28,7 +28,10 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import sv.edu.udb.fichaseducativas.components.ScreenFichas
+import sv.edu.udb.fichaseducativas.components.ScreenFichasForm
 import sv.edu.udb.fichaseducativas.components.ScreenInicio
+import sv.edu.udb.fichaseducativas.components.ScreenRevisarFichas
 import sv.edu.udb.fichaseducativas.components.ScreenTematica
 import sv.edu.udb.fichaseducativas.navigation.ModalDrawer
 import sv.edu.udb.fichaseducativas.navigation.NavigationStrings
@@ -103,6 +106,59 @@ fun MainComponent(
                     "${NavigationStrings.ItemMenuRouteTematicas}"
                 ){
                     ScreenTematica(
+                        modifier = modifier,
+                        navHostController = navHostController
+                    )
+                }
+
+                composable(
+                    route = "${NavigationStrings.ItemMenuRouteFichas}?idTematica={idTematica}",
+                    arguments = listOf(
+                        navArgument("idTematica"){
+                            type = NavType.IntType
+                            defaultValue = 0
+                        }
+                    )
+                ){
+                    ScreenFichas(
+                        modifier = modifier,
+                        navHostController = navHostController
+                    )
+                }
+
+                composable(
+                    route = "${NavigationStrings.ItemMenuRouteFichasRevisar}?idTematica={idTematica}",
+                    arguments = listOf(
+                        navArgument("idTematica"){
+                            type = NavType.IntType
+                            defaultValue = 0
+                        }
+                    )
+                ){
+                    ScreenRevisarFichas(
+                        modifier = modifier,
+                        navHostController = navHostController
+                    )
+                }
+
+                composable(
+                    route = "${NavigationStrings.ItemMenuRouteFichasForm}?action={action}&idTematica={idTematica}&id={id}",
+                    arguments = listOf(
+                        navArgument("action"){
+                            type = NavType.StringType
+                            defaultValue = NavigationStrings.ActionCreate
+                        },
+                        navArgument("idTematica"){
+                            type = NavType.IntType
+                            defaultValue = 0
+                        },
+                        navArgument("id"){
+                            type = NavType.IntType
+                            defaultValue = 0
+                        },
+                    )
+                ){
+                    ScreenFichasForm(
                         modifier = modifier,
                         navHostController = navHostController
                     )
