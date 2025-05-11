@@ -33,16 +33,6 @@ fun ScreenInicio(
     val tematicaService = remember { TematicaService(context) }
 
     var tematicas by remember { mutableStateOf(tematicaService.getAllTematicas()) }
-    var fichasPorTematica by remember { mutableStateOf<Map<Int, List<Ficha>>>(emptyMap()) }
-
-    LaunchedEffect(tematicas) {
-        val tempFichasPorTematica = mutableMapOf<Int, List<Ficha>>()
-        tematicas.forEach { tematica ->
-            val fichas = fichaService.getByTematicaId(tematica.Id)
-            tempFichasPorTematica[tematica.Id] = fichas
-        }
-        fichasPorTematica = tempFichasPorTematica
-    }
 
     Column(
         modifier = modifier
@@ -59,7 +49,7 @@ fun ScreenInicio(
 
         LazyColumn {
             items(tematicas) { tematica ->
-                val fichasDeEstaTematica = fichasPorTematica[tematica.Id] ?: emptyList()
+                val fichasDeEstaTematica = fichaService.contarFichasPorTematica(tematica.Id)
 
                 var expanded by remember { mutableStateOf(false) }
 
@@ -96,7 +86,7 @@ fun ScreenInicio(
 
                             Box(
                                 contentAlignment = Alignment.TopEnd,
-                                modifier = Modifier.wrapContentSize()
+                                //modifier = Modifier.wrapContentSize() // ERROR
                             ) {
                                 IconButton(onClick = { expanded = !expanded }) {
                                     Icon(
@@ -141,7 +131,7 @@ fun ScreenInicio(
                         Spacer(modifier = Modifier.height(16.dp))
 
                         Text(
-                            text = "Fichas totales: ${fichasDeEstaTematica.size}",
+                            text = "Fichas totales: ${fichasDeEstaTematica}",
                             style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 18.sp
@@ -168,16 +158,6 @@ fun ScreenInicio(
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 14.sp
                             )
-                        }
-
-                        if (fichasDeEstaTematica.isNotEmpty()) {
-                            Spacer(modifier = Modifier.height(8.dp))
-                            LazyColumn {
-                                items(fichasDeEstaTematica) { ficha ->
-                                    Text(text = ficha.Titulo, color = Color.Black)
-                                    Spacer(modifier = Modifier.height(8.dp))
-                                }
-                            }
                         }
                     }
                 }
