@@ -28,6 +28,20 @@ class FichaService(
         cursor.close()
         return total
     }
+    fun getByTematicaId(idTematica: Int): List<Ficha> {
+        val cursor: Cursor? = db.query(
+            Ficha.TABLE_NAME,
+            Ficha.COLUMNS,
+            "${Ficha.COL_ID_TEMATICA} = ?",
+            arrayOf(idTematica.toString()),
+            null,
+            null,
+            null
+        )
+
+        return generarList(cursor)
+    }
+
 
     fun generarContentValue(
         ficha : Ficha
