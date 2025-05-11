@@ -69,7 +69,7 @@ fun ScreenFichasForm(
             value = titulo,
             onValueChange = { setTitulo(it) },
             label = {
-                Text("Titulo:")
+                Text("Título:")
             },
             singleLine = true
         )
@@ -78,7 +78,7 @@ fun ScreenFichasForm(
             value = descripcionCara,
             onValueChange = { setDescripcionCara(it) },
             label = {
-                Text("Titulo:")
+                Text("Descripción (Cara):")
             },
             singleLine = true
         )
@@ -87,7 +87,7 @@ fun ScreenFichasForm(
             value = descripcionAtras,
             onValueChange = { setDescripcionAtras(it) },
             label = {
-                Text("Titulo:")
+                Text("Descripción (Atrás):")
             },
             singleLine = true
         )
@@ -110,7 +110,7 @@ fun ScreenFichasForm(
                     if(titulo.isNullOrBlank() || titulo.isNullOrEmpty()){
                         Toast.makeText(
                             context,
-                            "Debe ingresar un titulo...",
+                            "Debe ingresar un título...",
                             Toast.LENGTH_SHORT
                         ).show()
 
@@ -120,7 +120,7 @@ fun ScreenFichasForm(
                     if(descripcionCara.isNullOrBlank() || descripcionCara.isNullOrEmpty()){
                         Toast.makeText(
                             context,
-                            "Debe ingresar una descripción...",
+                            "Debe ingresar una descripción (cara)...",
                             Toast.LENGTH_SHORT
                         ).show()
 
@@ -130,7 +130,7 @@ fun ScreenFichasForm(
                     if(descripcionAtras.isNullOrBlank() || descripcionAtras.isNullOrEmpty()){
                         Toast.makeText(
                             context,
-                            "Debe ingresar una descripción...",
+                            "Debe ingresar una descripción (atrás)...",
                             Toast.LENGTH_SHORT
                         ).show()
 
@@ -142,7 +142,7 @@ fun ScreenFichasForm(
 
                         Toast.makeText(
                             context,
-                            "Ficha ingresada!!",
+                            "Ficha creada",
                             Toast.LENGTH_SHORT
                         ).show()
                     }else{
@@ -150,7 +150,7 @@ fun ScreenFichasForm(
 
                         Toast.makeText(
                             context,
-                            "Ficha actualizada!!",
+                            "Ficha actualizada",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -159,7 +159,7 @@ fun ScreenFichasForm(
                 }else{
                     Toast.makeText(
                         context,
-                        "La ficha no se puede crear porque no hay una temática origen",
+                        "Algo salió mal. No se pudo guardar la ficha.",
                         Toast.LENGTH_SHORT
                     ).show()
 

@@ -28,6 +28,7 @@ class FichaService(
         cursor.close()
         return total
     }
+
     fun getByTematicaId(idTematica: Int): List<Ficha> {
         val cursor: Cursor? = db.query(
             Ficha.TABLE_NAME,
