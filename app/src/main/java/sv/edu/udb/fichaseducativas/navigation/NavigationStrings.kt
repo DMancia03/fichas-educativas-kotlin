@@ -16,5 +16,9 @@ class NavigationStrings {
         //
         const val ActionCreate = "create"
         const val ActionUpdate = "update"
+        //
+        const val BtnRegresar = "Regresar"
+        const val BtnAnterior = "Anterior"
+        const val BtnSiguiente = "Siguiente"
     }
 }

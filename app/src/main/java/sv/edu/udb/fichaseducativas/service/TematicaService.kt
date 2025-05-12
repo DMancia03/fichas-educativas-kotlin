@@ -2,8 +2,10 @@ package sv.edu.udb.fichaseducativas.service
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import sv.edu.udb.fichaseducativas.data.HelperDb
+import sv.edu.udb.fichaseducativas.models.Ficha
 import sv.edu.udb.fichaseducativas.models.Tematica
 
 
@@ -65,4 +67,28 @@ class TematicaService(
         return db.delete(Tematica.TABLE_NAME, whereClause, whereArgs)
     }
 
+    fun getById(
+        id : Int
+    ) : Tematica {
+        val cursor : Cursor? = db.query(
+            Tematica.TABLE_NAME,
+            Tematica.COLUMNS,
+            "${Tematica.COL_ID}=?",
+            arrayOf(id.toString()),
+            null,
+            null,
+            null
+        )
+
+        if(cursor == null || cursor.count <= 0){
+            return Tematica(0, "")
+        }
+
+        cursor.moveToFirst()
+
+        return Tematica(
+            cursor.getInt(0),
+            cursor.getString(1)
+        )
+    }
 }
