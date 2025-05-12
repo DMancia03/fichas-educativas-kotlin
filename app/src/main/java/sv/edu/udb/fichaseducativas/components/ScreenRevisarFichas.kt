@@ -61,21 +61,6 @@ fun ScreenRevisarFichas(
             idTematica = navHostController.currentBackStackEntry!!.arguments!!.getInt("idTematica")
         }
 
-        // Validar id tematica
-        if(idTematica <= 0){
-            navHostController.navigateUp()
-
-            Toast.makeText(
-                context,
-                "No ha seleccionado una temática",
-                Toast.LENGTH_SHORT
-            ).show()
-
-            return
-        }
-
-        //Log.i("LOG_ERRORES", "ID TEMATICA NO ENCONTRADA")
-
         // Service
         val tematicaService = remember { TematicaService(context) }
         val fichaService = remember { FichaService(context) }
@@ -86,7 +71,7 @@ fun ScreenRevisarFichas(
         // Fichas
         val listaFichas = fichaService.getByTematicaId(idTematica)
 
-        if (listaFichas.count() <= 0){
+        if (listaFichas.count() <= 0 && idTematica != 0){
             navHostController.navigateUp()
 
             Toast.makeText(
@@ -133,9 +118,12 @@ fun ScreenRevisarFichas(
         // CONTENIDO -------------------------------------------------------------------------------
         val (btn01, setBtn01) = remember { mutableStateOf(NavigationStrings.BtnRegresar) }
         val (btn02, setBtn02) = remember { mutableStateOf(NavigationStrings.BtnSiguiente) }
+        var (esCara, setEsCara) = remember { mutableStateOf(true) }
 
         CardFicha(
-            ficha = ficha
+            ficha = ficha,
+            esCara = esCara,
+            setEsCara = setEsCara
         )
 
         // ACCIONES --------------------------------------------------------------------------------
@@ -173,6 +161,8 @@ fun ScreenRevisarFichas(
                     onClick = {
                         val index = indexCurrent - 1
 
+                        setEsCara(true)
+
                         if(btn01 == NavigationStrings.BtnRegresar){
                             navHostController.navigateUp()
 
@@ -206,6 +196,8 @@ fun ScreenRevisarFichas(
                 Button(
                     onClick = {
                         val index = indexCurrent + 1
+
+                        setEsCara(true)
 
                         if(btn02 == NavigationStrings.BtnRegresar){
                             navHostController.navigateUp()
